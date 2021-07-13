@@ -12,9 +12,12 @@ function stripeResponseHandler(status, response) {
 
     // ADDED THESE CONSOLE LOGS TO HELP WITH DEBUGGING!
     console.log('response.error >> ');
-    console.log(response.error);
-    
-    $form.find('.payment-errors').text(response.error);
+    const err = response.error;
+
+    const errorString = `type: "${err.type}", code: "${err.code}", message: "${err.message}"`;
+    console.log(errorString);
+
+    $form.find('.payment-errors').text(errorString);
   } else {
     var token = response.id;
     $.ajax({
