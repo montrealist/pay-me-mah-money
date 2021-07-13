@@ -23,16 +23,13 @@ def index():
 def create_and_charge_customer():
     token = request.form['token']
     email = request.form['email']
+
     # amount_in_dollars = float(request.form['amount'])
     amount_in_dollars = 42
     amount_in_cents = int(amount_in_dollars) * 100
-
+    
     try:
-        # customer = stripe.Customer.create(email=email, source=token)
-        customer = stripe.Customer.create(
-                email='customer@example.com',
-                source=request.form['stripeToken']
-            )
+        customer = stripe.Customer.create(email=email, source=token)
 
         customer_id = customer['id']
 
