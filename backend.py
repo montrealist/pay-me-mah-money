@@ -1,10 +1,22 @@
+from flask import Flask, render_template, request
+import stripe
+from dotenv import load_dotenv
+from os import environ 
+
+load_dotenv('.env')
+
+stripe.api_key = environ.get('SECRET_KEY')
+stripe.publishable_key = environ.get('PUBLISHABLE_KEY')
+
+application = Flask(__name__, template_folder='./')
+
 def render_response(kind, message):
     return '["{0}","{1}"]'.format(kind, message)
 
 
 @application.route('/')
 def index():
-    return render_template('frontend.html', **{'pk': PUBLISHABLE_KEY})
+    return render_template('frontend.html', **{'pk': stripe.publishable_key})
 
 
 @application.route('/create_and_charge_customer', methods=['POST'])
