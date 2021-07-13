@@ -8,7 +8,7 @@ load_dotenv('.env')
 stripe.api_key = environ.get('SECRET_KEY')
 stripe.publishable_key = environ.get('PUBLISHABLE_KEY')
 
-application = Flask(__name__, template_folder='./')
+application = Flask(__name__, template_folder='./templates')
 
 def render_response(kind, message):
     return '["{0}","{1}"]'.format(kind, message)
