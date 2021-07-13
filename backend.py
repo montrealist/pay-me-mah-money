@@ -43,8 +43,13 @@ def create_and_charge_customer():
         )
     except stripe.error.StripeError as e:
         #body = e.json_body
-        return render_response("error", e)
+
+        print('error status is: %s' % e.http_status)
+        print('error code is: %s' % e.code)
+        print('error message is: %s' % e.user_message)
+
+        return render_response("error", e.user_message)
     except Exception as e:
-        return render_response("error", "backend error")
+        return render_response("error", e)
 
     return render_response("success", "You made a successful payment!")
